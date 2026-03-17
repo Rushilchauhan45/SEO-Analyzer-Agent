@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css">
     <link href="https://cdn.jsdelivr.net/npm/swiper@11.0.5/swiper-bundle.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     
     <style>
@@ -23,6 +23,8 @@
             --brand2: #06B6D4;
             --accent: #a855f7;
             --border-color: #1F2937;
+            --logo-primary: #3B82F6;
+            --logo-secondary: #ffffff;
         }
 
         html[data-theme="light"] {
@@ -35,6 +37,8 @@
             --brand2: #06B6D4;
             --accent: #a855f7;
             --border-color: #e2e8f0;
+            --logo-primary: #DC2626;
+            --logo-secondary: #000000;
         }
 
         * {
@@ -60,12 +64,18 @@
             transition: all 0.3s ease;
         }
 
-        .section-gradient {
-            background: linear-gradient(135deg, transparent 0%, rgba(99, 102, 241, 0.05) 100%);
+        html[data-theme="light"] .glass {
+            background: rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(99, 102, 241, 0.15);
         }
 
-        html[data-theme="light"] .section-gradient {
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.02) 0%, rgba(6, 182, 212, 0.02) 100%);
+        /* Unified Section Gradient - All sections except hero */
+        .section-unified {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(6, 182, 212, 0.08) 100%);
+        }
+
+        html[data-theme="light"] .section-unified {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.04) 0%, rgba(6, 182, 212, 0.04) 100%);
         }
 
         .card-hover-glow {
@@ -81,11 +91,15 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at center, rgba(99, 102, 241, 0.4) 0%, transparent 70%);
+            background: radial-gradient(circle at center, rgba(99, 102, 241, 0.3) 0%, transparent 70%);
             opacity: 0;
             transition: opacity 0.4s ease;
             pointer-events: none;
             z-index: 1;
+        }
+
+        html[data-theme="light"] .card-hover-glow::before {
+            background: radial-gradient(circle at center, rgba(99, 102, 241, 0.2) 0%, transparent 70%);
         }
 
         .card-hover-glow:hover::before {
@@ -93,9 +107,13 @@
         }
 
         .card-hover-glow:hover {
-            transform: translateY(-8px);
-            border-color: rgba(99, 102, 241, 0.3);
-            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.15);
+            transform: translateY(-12px) scale(1.02);
+            border-color: rgba(99, 102, 241, 0.4);
+            box-shadow: 0 25px 50px rgba(99, 102, 241, 0.2);
+        }
+
+        html[data-theme="light"] .card-hover-glow:hover {
+            box-shadow: 0 25px 50px rgba(99, 102, 241, 0.12);
         }
 
         .btn-glow {
@@ -119,6 +137,11 @@
             left: 100%;
         }
 
+        .btn-glow:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.3);
+        }
+
         .text-gradient {
             background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%);
             -webkit-background-clip: text;
@@ -127,20 +150,26 @@
         }
 
         .nav-terminal {
-            background: rgba(5, 6, 10, 0.7);
-            border: 1px solid rgba(99, 102, 241, 0.2);
+            background: rgba(5, 6, 10, 0.8);
+            border: 1px solid rgba(99, 102, 241, 0.3);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             border-radius: 50px;
-            box-shadow: 0 4px 30px rgba(99, 102, 241, 0.1);
+            box-shadow: 0 8px 32px rgba(99, 102, 241, 0.15);
+            transition: all 0.3s ease;
         }
 
         html[data-theme="light"] .nav-terminal {
-            background: rgba(248, 250, 252, 0.85);
-            border: 1px solid rgba(99, 102, 241, 0.15);
+            background: rgba(248, 250, 252, 0.9);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            box-shadow: 0 8px 32px rgba(99, 102, 241, 0.08);
         }
 
-        /* scrollbar styling */
+        .nav-terminal:hover {
+            border-color: rgba(99, 102, 241, 0.5);
+            box-shadow: 0 12px 40px rgba(99, 102, 241, 0.2);
+        }
+
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -158,18 +187,121 @@
             background: var(--accent);
         }
 
-        /* Responsive adjustments */
+        /* Advanced Feature Card */
+        .feature-card-advanced {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .feature-card-advanced::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent, rgba(99, 102, 241, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .feature-card-advanced:hover::after {
+            opacity: 1;
+        }
+
+        .feature-card-advanced:hover {
+            transform: translateY(-15px);
+            border-color: rgba(99, 102, 241, 0.5);
+        }
+
+        /* Roadmap Step */
+        .roadmap-step {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .roadmap-step::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(99, 102, 241, 0.3), rgba(6, 182, 212, 0.3));
+            z-index: 0;
+        }
+
+        .roadmap-step:last-child::before {
+            display: none;
+        }
+
+        /* Review Card Animated */
+        .review-card-animated {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .review-card-animated::before {
+            content: '★';
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            font-size: 100px;
+            opacity: 0.05;
+            transition: all 0.3s;
+        }
+
+        .review-card-animated:hover::before {
+            top: -10px;
+            right: 10px;
+            opacity: 0.1;
+        }
+
+        .review-card-animated:hover {
+            transform: translateY(-10px);
+        }
+
+        /* FAQ Advanced */
+        .faq-item-advanced {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item-advanced summary {
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.3s ease;
+            padding: 20px;
+            border-radius: 12px;
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        html[data-theme="light"] .faq-item-advanced summary {
+            background: rgba(99, 102, 241, 0.03);
+        }
+
+        .faq-item-advanced summary:hover {
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .faq-item-advanced[open] summary {
+            background: rgba(99, 102, 241, 0.15);
+            border-color: rgba(99, 102, 241, 0.5);
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
             body {
                 font-size: 14px;
             }
 
             h1 {
-                font-size: 24px !important;
+                font-size: 28px !important;
             }
 
             h2 {
-                font-size: 20px !important;
+                font-size: 22px !important;
             }
 
             h3 {
@@ -177,13 +309,17 @@
             }
 
             .nav-terminal {
-                border-radius: 20px;
+                border-radius: 25px;
+            }
+
+            .roadmap-step::before {
+                left: 15px;
             }
         }
 
         @media (max-width: 480px) {
             h1 {
-                font-size: 20px !important;
+                font-size: 22px !important;
             }
 
             h2 {
@@ -200,29 +336,11 @@
             }
         }
 
-        .fade-in {
-            animation: fadeIn 0.8s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        /* Vanta canvas positioning */
-        #hero-bg canvas {
-            position: absolute;
-        }
-
         .form-input-terminal {
             background: var(--bg-surface);
             border: 1px solid var(--border-color);
             border-radius: 12px;
-            padding: 12px 16px;
+            padding: 14px 18px;
             color: var(--text-primary);
             font-size: 14px;
             transition: all 0.3s ease;
@@ -232,8 +350,9 @@
         .form-input-terminal:focus {
             outline: none;
             border-color: var(--brand);
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
-            background: rgba(99, 102, 241, 0.02);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+            background: rgba(99, 102, 241, 0.03);
+            transform: translateY(-2px);
         }
 
         .form-input-terminal::placeholder {
@@ -257,27 +376,86 @@
                 background-position: 100% 50%;
             }
         }
+
+        .icon-advanced {
+            font-size: 3rem;
+            background: linear-gradient(135deg, var(--brand), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transition: all 0.3s ease;
+        }
+
+        .card-hover-glow:hover .icon-advanced {
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        /* Logo Dynamic Colors */
+        .logo-dynamic {
+            color: var(--logo-primary);
+            transition: color 0.3s ease;
+        }
+
+        .logo-dynamic-secondary {
+            color: var(--logo-secondary);
+            transition: color 0.3s ease;
+        }
     </style>
 </head>
 <body>
 
-<!-- Navigation Bar -->
-<nav class="fixed top-4 left-0 right-0 z-50 flex justify-center">
-    <div class="nav-terminal px-6 py-3 flex items-center justify-between max-w-4xl w-11/12 md:w-auto">
-        <div class="flex items-center gap-2">
-            <i class="ri-blaze-fill text-2xl text-red-500"></i>
-            <div>
-                <h1 class="text-lg font-bold text-white hidden sm:inline">RankIQ</h1>
+<!-- Navigation Bar - FULL VERSION -->
+<nav class="fixed top-4 left-0 right-0 z-50 flex justify-center px-4">
+    <div class="nav-terminal px-8 py-3 w-full max-w-7xl flex items-center justify-between">
+        <!-- Logo -->
+        <div class="flex items-center gap-3 flex-shrink-0">
+            <div class="relative w-10 h-10">
+                <i class="ri-blaze-fill text-3xl logo-dynamic"></i>
+            </div>
+            <div class="hidden sm:block">
+                <h1 class="text-lg sm:text-xl font-bold logo-dynamic-secondary">RankIQ</h1>
                 <p class="text-xs text-gray-400 leading-none">by Pixora Graphics</p>
             </div>
         </div>
         
-        <div class="flex items-center gap-4 ml-4 sm:ml-8">
-            <a href="#features" class="text-sm text-gray-300 hover:text-white transition hidden sm:inline">Features</a>
-            <a href="#workflow" class="text-sm text-gray-300 hover:text-white transition hidden sm:inline">How it Works</a>
-            <a href="#reviews" class="text-sm text-gray-300 hover:text-white transition hidden sm:inline">Reviews</a>
+        <!-- Navigation Links -->
+        <div class="hidden md:flex items-center gap-8 ml-auto mr-8">
+            <a href="#features" class="text-sm font-medium text-gray-300 hover:text-white transition relative group">
+                Features
+                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 group-hover:w-full transition-all duration-300"></span>
+            </a>
+            <a href="#workflow" class="text-sm font-medium text-gray-300 hover:text-white transition relative group">
+                How It Works
+                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 group-hover:w-full transition-all duration-300"></span>
+            </a>
+            <a href="#reviews" class="text-sm font-medium text-gray-300 hover:text-white transition relative group">
+                Reviews
+                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 group-hover:w-full transition-all duration-300"></span>
+            </a>
+            <a href="#faq" class="text-sm font-medium text-gray-300 hover:text-white transition relative group">
+                FAQ
+                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 group-hover:w-full transition-all duration-300"></span>
+            </a>
+        </div>
+
+        <!-- Social Links & Theme Toggle -->
+        <div class="flex items-center gap-4">
+            <!-- Social Links -->
+            <div class="hidden lg:flex items-center gap-3">
+                <a href="#" class="text-gray-400 hover:text-white transition transform hover:scale-110 duration-300 text-lg">
+                    <i class="ri-twitter-x-line"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-white transition transform hover:scale-110 duration-300 text-lg">
+                    <i class="ri-linkedin-box-line"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-white transition transform hover:scale-110 duration-300 text-lg">
+                    <i class="ri-github-line"></i>
+                </a>
+                <div class="w-px h-6 bg-white/10"></div>
+            </div>
             
-            <button id="themeToggle" class="text-xl text-yellow-400 hover:text-yellow-300 transition p-2 rounded-lg hover:bg-white/10">
+            <!-- Theme Toggle -->
+            <button id="themeToggle" class="text-xl text-yellow-400 hover:text-yellow-300 transition p-2 rounded-lg hover:bg-white/10 transform hover:scale-110">
                 <i class="ri-sun-line"></i>
             </button>
         </div>
@@ -285,377 +463,584 @@
 </nav>
 
 <!-- Hero Section -->
-<section id="hero" class="min-h-screen w-full relative overflow-hidden flex items-center justify-center pt-20 md:pt-0">
+<section id="hero" class="min-h-screen w-full relative overflow-hidden flex items-center justify-center pt-24 md:pt-0">
     <div id="hero-bg" class="absolute inset-0 w-full h-full"></div>
     
-    <div class="absolute inset-0 bg-gradient-to-br from-indigo-600/20 via-transparent to-purple-600/20"></div>
+    <div class="absolute inset-0 bg-gradient-to-br from-indigo-600/25 via-transparent to-purple-600/25"></div>
     
-    <div class="relative z-10 px-4 sm:px-6 lg:px-8 py-12 max-w-6xl mx-auto w-full">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+    <div class="relative z-10 px-4 sm:px-6 lg:px-8 py-12 max-w-7xl mx-auto w-full">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <!-- Left Side -->
-            <div class="space-y-6 text-center md:text-left" data-aos="fade-right" data-aos-duration="800">
-                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
-                    <span class="gradient-text-dynamic">Dominate Search Rankings</span>
-                </h1>
-                <p class="text-lg text-gray-300 leading-relaxed">
-                    Advanced AI-powered SEO analytics platform. Track rankings, analyze competitors, and optimize your digital presence with RankIQ.
-                </p>
+            <div class="space-y-8 text-center lg:text-left" data-aos="fade-right" data-aos-duration="800">
+                <div>
+                    <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-4">
+                        <span class="gradient-text-dynamic">Dominate</span>
+                        <br />Search Rankings
+                    </h1>
+                    <p class="text-lg sm:text-xl text-gray-300 leading-relaxed max-w-xl">
+                        Advanced AI-powered SEO analytics platform. Track rankings, analyze competitors, and optimize your digital presence with RankIQ's enterprise-grade tools.
+                    </p>
+                </div>
                 
-                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                    <button onclick="document.getElementById('deploy').scrollIntoView({behavior: 'smooth'})" class="btn-glow bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 px-8 py-4 rounded-xl font-semibold text-white transition transform hover:scale-105 shadow-lg">
-                        Get Started Now
+                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                    <button onclick="document.getElementById('features').scrollIntoView({behavior: 'smooth'})" class="btn-glow bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 px-10 py-4 rounded-xl font-bold text-white transition transform hover:scale-105 shadow-lg text-lg">
+                        Explore Features
                     </button>
-                    <button class="px-8 py-4 rounded-xl font-semibold border-2 border-cyan-500 text-cyan-400 hover:bg-cyan-500/10 transition transform hover:scale-105">
-                        Watch Demo
+                    <button class="px-10 py-4 rounded-xl font-bold border-2 border-cyan-500 text-cyan-400 hover:bg-cyan-500/10 transition transform hover:scale-105 text-lg">
+                        Watch Demo <i class="ri-play-circle-line ml-2"></i>
                     </button>
                 </div>
 
-                <div class="flex flex-wrap gap-4 justify-center md:justify-start pt-4">
-                    <div class="flex items-center gap-2">
-                        <i class="ri-check-double-line text-green-400 text-xl"></i>
-                        <span class="text-sm">Real-time Analytics</span>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-4">
+                    <div class="flex items-center gap-3 justify-center lg:justify-start">
+                        <i class="ri-check-double-fill text-emerald-400 text-2xl"></i>
+                        <span class="text-base font-semibold">Real-time Analytics</span>
                     </div>
-                    <div class="flex items-center gap-2">
-                        <i class="ri-check-double-line text-green-400 text-xl"></i>
-                        <span class="text-sm">Competitor Insights</span>
+                    <div class="flex items-center gap-3 justify-center lg:justify-start">
+                        <i class="ri-check-double-fill text-emerald-400 text-2xl"></i>
+                        <span class="text-base font-semibold">AI-Powered Insights</span>
                     </div>
-                    <div class="flex items-center gap-2">
-                        <i class="ri-check-double-line text-green-400 text-xl"></i>
-                        <span class="text-sm">AI-Powered Reports</span>
+                    <div class="flex items-center gap-3 justify-center lg:justify-start">
+                        <i class="ri-check-double-fill text-emerald-400 text-2xl"></i>
+                        <span class="text-base font-semibold">99.9% Uptime</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Right Side - Stats/Cards -->
-            <div class="space-y-4 hidden md:flex flex-col" data-aos="fade-left" data-aos-duration="800">
-                <div class="glass card-hover-glow p-6 border border-indigo-500/30">
-                    <div class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">12.5K+</div>
-                    <p class="text-gray-300 mt-2">Active Users Worldwide</p>
+            <!-- Right Side - Advanced Stats -->
+            <div class="space-y-6 hidden lg:flex flex-col" data-aos="fade-left" data-aos-duration="800">
+                <!-- Stat 1 -->
+                <div class="glass card-hover-glow p-8 border border-indigo-500/40 bg-gradient-to-br from-indigo-500/10 to-purple-500/10">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <p class="text-sm text-gray-400 mb-2">Active Users</p>
+                            <div class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">12.5K+</div>
+                        </div>
+                        <i class="ri-user-star-line text-4xl text-indigo-400 opacity-30"></i>
+                    </div>
+                    <div class="text-xs text-green-400 flex items-center gap-1">
+                        <i class="ri-arrow-up-line"></i> 45% this month
+                    </div>
                 </div>
-                <div class="glass card-hover-glow p-6 border border-purple-500/30">
-                    <div class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">250M+</div>
-                    <p class="text-gray-300 mt-2">Keywords Tracked Daily</p>
+
+                <!-- Stat 2 -->
+                <div class="glass card-hover-glow p-8 border border-purple-500/40 bg-gradient-to-br from-purple-500/10 to-pink-500/10">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <p class="text-sm text-gray-400 mb-2">Keywords Tracked</p>
+                            <div class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">250M+</div>
+                        </div>
+                        <i class="ri-search-2-line text-4xl text-purple-400 opacity-30"></i>
+                    </div>
+                    <div class="text-xs text-green-400 flex items-center gap-1">
+                        <i class="ri-arrow-up-line"></i> Updated hourly
+                    </div>
                 </div>
-                <div class="glass card-hover-glow p-6 border border-cyan-500/30">
-                    <div class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">99.9%</div>
-                    <p class="text-gray-300 mt-2">System Uptime Guarantee</p>
+
+                <!-- Stat 3 -->
+                <div class="glass card-hover-glow p-8 border border-cyan-500/40 bg-gradient-to-br from-cyan-500/10 to-blue-500/10">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <p class="text-sm text-gray-400 mb-2">System Uptime</p>
+                            <div class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">99.9%</div>
+                        </div>
+                        <i class="ri-shield-check-line text-4xl text-cyan-400 opacity-30"></i>
+                    </div>
+                    <div class="text-xs text-green-400 flex items-center gap-1">
+                        <i class="ri-check-line"></i> Enterprise Grade
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Features Section -->
-<section id="features" class="w-full py-16 md:py-32 px-4 sm:px-6 lg:px-8 section-gradient">
-    <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-12 md:mb-20" data-aos="fade-up">
-            <h2 class="text-3xl md:text-5xl font-bold mb-4">Powerful Features</h2>
-            <p class="text-lg text-gray-400 max-w-2xl mx-auto">Everything you need to dominate search rankings and grow your online presence</p>
+<!-- Features Section - ADVANCED DESIGN -->
+<section id="features" class="w-full py-20 md:py-40 px-4 sm:px-6 lg:px-8 section-unified relative">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-20" data-aos="fade-up">
+            <h2 class="text-4xl md:text-6xl font-bold mb-6">
+                Enterprise-Grade <span class="gradient-text-dynamic">Features</span>
+            </h2>
+            <p class="text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed">
+                Powerful tools designed for professionals. Everything you need to dominate search rankings and scale your SEO strategy to the next level.
+            </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            <!-- Feature Card 1 -->
-            <div class="glass card-hover-glow p-6 md:p-8 border border-indigo-500/20" data-aos="fade-up" data-aos-delay="0">
-                <div class="text-4xl mb-4 text-indigo-400">
-                    <i class="ri-radar-chart-line"></i>
+        <!-- Features Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Feature 1 -->
+            <div class="glass feature-card-advanced card-hover-glow p-8 border border-indigo-500/30 group" data-aos="fade-up" data-aos-delay="0">
+                <div class="text-5xl mb-6 text-indigo-400">
+                    <i class="ri-radar-2-line icon-advanced"></i>
                 </div>
-                <h3 class="text-xl font-bold mb-3">Real-Time Tracking</h3>
-                <p class="text-gray-300 text-sm md:text-base leading-relaxed">Monitor your keyword rankings 24/7 with instant notifications and detailed performance metrics updated hourly.</p>
-            </div>
-
-            <!-- Feature Card 2 -->
-            <div class="glass card-hover-glow p-6 md:p-8 border border-cyan-500/20" data-aos="fade-up" data-aos-delay="100">
-                <div class="text-4xl mb-4 text-cyan-400">
-                    <i class="ri-team-line"></i>
+                <h3 class="text-2xl font-bold mb-4">Real-Time Tracking</h3>
+                <p class="text-gray-300 leading-relaxed mb-6">Monitor your keyword rankings 24/7 with minute-by-minute accuracy. Get instant notifications for ranking changes and algorithm updates.</p>
+                <div class="flex items-center gap-2 text-sm text-indigo-400 font-semibold group-hover:gap-3 transition-all">
+                    Learn more <i class="ri-arrow-right-line"></i>
                 </div>
-                <h3 class="text-xl font-bold mb-3">Competitor Analysis</h3>
-                <p class="text-gray-300 text-sm md:text-base leading-relaxed">Deep insights into competitor strategies, keywords, and backlink profiles to stay ahead of the competition.</p>
             </div>
 
-            <!-- Feature Card 3 -->
-            <div class="glass card-hover-glow p-6 md:p-8 border border-purple-500/20" data-aos="fade-up" data-aos-delay="200">
-                <div class="text-4xl mb-4 text-purple-400">
-                    <i class="ri-brain-2-line"></i>
+            <!-- Feature 2 -->
+            <div class="glass feature-card-advanced card-hover-glow p-8 border border-cyan-500/30" data-aos="fade-up" data-aos-delay="100">
+                <div class="text-5xl mb-6 text-cyan-400">
+                    <i class="ri-team-2-line icon-advanced"></i>
                 </div>
-                <h3 class="text-xl font-bold mb-3">AI-Powered Insights</h3>
-                <p class="text-gray-300 text-sm md:text-base leading-relaxed">Machine learning algorithms analyze trends and recommend optimization strategies to improve rankings faster.</p>
-            </div>
-
-            <!-- Feature Card 4 -->
-            <div class="glass card-hover-glow p-6 md:p-8 border border-pink-500/20" data-aos="fade-up" data-aos-delay="300">
-                <div class="text-4xl mb-4 text-pink-400">
-                    <i class="ri-bar-chart-2-line"></i>
+                <h3 class="text-2xl font-bold mb-4">Competitor Analysis</h3>
+                <p class="text-gray-300 leading-relaxed mb-6">Deep insights into competitor backlinks, keywords, and strategies. Identify gaps and opportunities to outrank your competition faster.</p>
+                <div class="flex items-center gap-2 text-sm text-cyan-400 font-semibold group-hover:gap-3 transition-all">
+                    Learn more <i class="ri-arrow-right-line"></i>
                 </div>
-                <h3 class="text-xl font-bold mb-3">Advanced Reports</h3>
-                <p class="text-gray-300 text-sm md:text-base leading-relaxed">Generate comprehensive, customizable reports with visualizations to share with clients and stakeholders.</p>
             </div>
 
-            <!-- Feature Card 5 -->
-            <div class="glass card-hover-glow p-6 md:p-8 border border-green-500/20" data-aos="fade-up" data-aos-delay="400">
-                <div class="text-4xl mb-4 text-green-400">
-                    <i class="ri-code-s-slash-line"></i>
+            <!-- Feature 3 -->
+            <div class="glass feature-card-advanced card-hover-glow p-8 border border-purple-500/30" data-aos="fade-up" data-aos-delay="200">
+                <div class="text-5xl mb-6 text-purple-400">
+                    <i class="ri-sparkles-line icon-advanced"></i>
                 </div>
-                <h3 class="text-xl font-bold mb-3">API Integration</h3>
-                <p class="text-gray-300 text-sm md:text-base leading-relaxed">Seamless API access for developers to integrate RankIQ data into existing tools and workflows.</p>
-            </div>
-
-            <!-- Feature Card 6 -->
-            <div class="glass card-hover-glow p-6 md:p-8 border border-yellow-500/20" data-aos="fade-up" data-aos-delay="500">
-                <div class="text-4xl mb-4 text-yellow-400">
-                    <i class="ri-secure-payment-line"></i>
+                <h3 class="text-2xl font-bold mb-4">AI-Powered Insights</h3>
+                <p class="text-gray-300 leading-relaxed mb-6">Machine learning analyzes your data and recommends optimization strategies. Get actionable intelligence to improve rankings automatically.</p>
+                <div class="flex items-center gap-2 text-sm text-purple-400 font-semibold group-hover:gap-3 transition-all">
+                    Learn more <i class="ri-arrow-right-line"></i>
                 </div>
-                <h3 class="text-xl font-bold mb-3">Enterprise Security</h3>
-                <p class="text-gray-300 text-sm md:text-base leading-relaxed">Bank-grade encryption, 2FA, and compliance with GDPR, SOC2, and international data protection standards.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Workflow Section -->
-<section id="workflow" class="w-full py-16 md:py-32 px-4 sm:px-6 lg:px-8 section-gradient">
-    <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-12 md:mb-20" data-aos="fade-up">
-            <h2 class="text-3xl md:text-5xl font-bold mb-4">How It Works</h2>
-            <p class="text-lg text-gray-400 max-w-2xl mx-auto">Get started in minutes with our simple, powerful workflow</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-            <!-- Step 1 -->
-            <div class="glass card-hover-glow p-6 md:p-8 border border-indigo-500/20 text-center" data-aos="fade-up" data-aos-delay="0">
-                <div class="w-12 h-12 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg mx-auto mb-4">1</div>
-                <h3 class="text-xl font-bold mb-3">Sign Up</h3>
-                <p class="text-gray-300 text-sm">Create your free account and verify your email in seconds.</p>
             </div>
 
-            <!-- Step 2 -->
-            <div class="glass card-hover-glow p-6 md:p-8 border border-cyan-500/20 text-center" data-aos="fade-up" data-aos-delay="100">
-                <div class="w-12 h-12 bg-gradient-to-br from-cyan-600 to-blue-600 rounded-full flex items-center justify-center text-white font-bold text-lg mx-auto mb-4">2</div>
-                <h3 class="text-xl font-bold mb-3">Add Keywords</h3>
-                <p class="text-gray-300 text-sm">Import or add your target keywords from your SEO strategy.</p>
+            <!-- Feature 4 -->
+            <div class="glass feature-card-advanced card-hover-glow p-8 border border-pink-500/30" data-aos="fade-up" data-aos-delay="300">
+                <div class="text-5xl mb-6 text-pink-400">
+                    <i class="ri-bar-chart-2-line icon-advanced"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">Advanced Reports</h3>
+                <p class="text-gray-300 leading-relaxed mb-6">Generate professional, customizable reports with visualizations. Share insights with clients and stakeholders with one click.</p>
+                <div class="flex items-center gap-2 text-sm text-pink-400 font-semibold group-hover:gap-3 transition-all">
+                    Learn more <i class="ri-arrow-right-line"></i>
+                </div>
             </div>
 
-            <!-- Step 3 -->
-            <div class="glass card-hover-glow p-6 md:p-8 border border-purple-500/20 text-center" data-aos="fade-up" data-aos-delay="200">
-                <div class="w-12 h-12 bg-gradient-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-white font-bold text-lg mx-auto mb-4">3</div>
-                <h3 class="text-xl font-bold mb-3">Track Rankings</h3>
-                <p class="text-gray-300 text-sm">Our AI automatically monitors your rankings 24/7 across all engines.</p>
+            <!-- Feature 5 -->
+            <div class="glass feature-card-advanced card-hover-glow p-8 border border-emerald-500/30" data-aos="fade-up" data-aos-delay="400">
+                <div class="text-5xl mb-6 text-emerald-400">
+                    <i class="ri-code-s-slash-line icon-advanced"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">API & Integrations</h3>
+                <p class="text-gray-300 leading-relaxed mb-6">Full REST API with WebHooks. Integrate seamlessly with your existing tools - Slack, Zapier, HubSpot, and more.</p>
+                <div class="flex items-center gap-2 text-sm text-emerald-400 font-semibold group-hover:gap-3 transition-all">
+                    Learn more <i class="ri-arrow-right-line"></i>
+                </div>
             </div>
 
-            <!-- Step 4 -->
-            <div class="glass card-hover-glow p-6 md:p-8 border border-green-500/20 text-center" data-aos="fade-up" data-aos-delay="300">
-                <div class="w-12 h-12 bg-gradient-to-br from-green-600 to-teal-600 rounded-full flex items-center justify-center text-white font-bold text-lg mx-auto mb-4">4</div>
-                <h3 class="text-xl font-bold mb-3">Get Insights</h3>
-                <p class="text-gray-300 text-sm">Receive AI-powered recommendations to improve your rankings.</p>
+            <!-- Feature 6 -->
+            <div class="glass feature-card-advanced card-hover-glow p-8 border border-yellow-500/30" data-aos="fade-up" data-aos-delay="500">
+                <div class="text-5xl mb-6 text-yellow-400">
+                    <i class="ri-shield-check-line icon-advanced"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">Enterprise Security</h3>
+                <p class="text-gray-300 leading-relaxed mb-6">Bank-grade encryption, 2FA, SOC2 compliance, and GDPR certified. Your data is protected with military-grade security standards.</p>
+                <div class="flex items-center gap-2 text-sm text-yellow-400 font-semibold group-hover:gap-3 transition-all">
+                    Learn more <i class="ri-arrow-right-line"></i>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Reviews Section -->
-<section id="reviews" class="w-full py-16 md:py-32 px-4 sm:px-6 lg:px-8 section-gradient">
-    <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-12 md:mb-20" data-aos="fade-up">
-            <h2 class="text-3xl md:text-5xl font-bold mb-4">Loved by Professionals</h2>
-            <p class="text-lg text-gray-400 max-w-2xl mx-auto">See what our users say about RankIQ</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            <!-- Review 1 -->
-            <div class="glass card-hover-glow p-6 md:p-8 border border-indigo-500/20" data-aos="fade-up" data-aos-delay="0">
-                <div class="flex items-center mb-4">
-                    <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold">JP</div>
-                    <div class="ml-4">
-                        <h4 class="font-bold">John Parker</h4>
-                        <p class="text-sm text-gray-400">SEO Manager</p>
-                    </div>
-                </div>
-                <div class="flex gap-1 mb-4">
-                    <i class="ri-star-fill text-yellow-400"></i>
-                    <i class="ri-star-fill text-yellow-400"></i>
-                    <i class="ri-star-fill text-yellow-400"></i>
-                    <i class="ri-star-fill text-yellow-400"></i>
-                    <i class="ri-star-fill text-yellow-400"></i>
-                </div>
-                <p class="text-gray-300 text-sm leading-relaxed">"RankIQ transformed our SEO strategy completely. The AI insights are incredibly accurate and helped us rank for competitive keywords."</p>
+<!-- CTA Form Section - AFTER FEATURES (REPOSITIONED) -->
+<section id="contact" class="w-full py-20 md:py-40 px-4 sm:px-6 lg:px-8 section-unified">
+    <div class="max-w-5xl mx-auto">
+        <div class="glass card-hover-glow p-8 md:p-16 border border-indigo-500/40 bg-gradient-to-br from-indigo-500/10 to-purple-500/10" data-aos="fade-up">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    Start Your Journey Today
+                </h2>
+                <p class="text-lg text-gray-300">Join thousands of professionals dominating their markets. Get 14 days free - no credit card required.</p>
             </div>
-
-            <!-- Review 2 -->
-            <div class="glass card-hover-glow p-6 md:p-8 border border-cyan-500/20" data-aos="fade-up" data-aos-delay="100">
-                <div class="flex items-center mb-4">
-                    <div class="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-full flex items-center justify-center text-white font-bold">SA</div>
-                    <div class="ml-4">
-                        <h4 class="font-bold">Sarah Anderson</h4>
-                        <p class="text-sm text-gray-400">Digital Marketer</p>
-                    </div>
-                </div>
-                <div class="flex gap-1 mb-4">
-                    <i class="ri-star-fill text-yellow-400"></i>
-                    <i class="ri-star-fill text-yellow-400"></i>
-                    <i class="ri-star-fill text-yellow-400"></i>
-                    <i class="ri-star-fill text-yellow-400"></i>
-                    <i class="ri-star-fill text-yellow-400"></i>
-                </div>
-                <p class="text-gray-300 text-sm leading-relaxed">"Best SEO platform I've used. The competitor analysis feature alone is worth the investment. Highly recommended!"</p>
-            </div>
-
-            <!-- Review 3 -->
-            <div class="glass card-hover-glow p-6 md:p-8 border border-purple-500/20" data-aos="fade-up" data-aos-delay="200">
-                <div class="flex items-center mb-4">
-                    <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold">MK</div>
-                    <div class="ml-4">
-                        <h4 class="font-bold">Michael Khan</h4>
-                        <p class="text-sm text-gray-400">Founder</p>
-                    </div>
-                </div>
-                <div class="flex gap-1 mb-4">
-                    <i class="ri-star-fill text-yellow-400"></i>
-                    <i class="ri-star-fill text-yellow-400"></i>
-                    <i class="ri-star-fill text-yellow-400"></i>
-                    <i class="ri-star-fill text-yellow-400"></i>
-                    <i class="ri-star-fill text-yellow-400"></i>
-                </div>
-                <p class="text-gray-300 text-sm leading-relaxed">"Excellent customer support and constant updates. RankIQ is an essential tool for any serious SEO professional."</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- CTA Section -->
-<section id="deploy" class="w-full py-16 md:py-32 px-4 sm:px-6 lg:px-8 section-gradient">
-    <div class="max-w-4xl mx-auto">
-        <div class="glass card-hover-glow p-8 md:p-12 border border-indigo-500/30" data-aos="fade-up">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8">Start Your SEO Journey Today</h2>
             
             <form id="contactForm" class="space-y-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label class="block text-sm font-semibold mb-2">Full Name *</label>
+                        <label class="block text-sm font-bold mb-3 text-white">Full Name *</label>
                         <input type="text" id="userName" class="form-input-terminal" placeholder="Your name" required>
                     </div>
                     <div>
-                        <label class="block text-sm font-semibold mb-2">Email Address *</label>
+                        <label class="block text-sm font-bold mb-3 text-white">Email Address *</label>
                         <input type="email" id="userEmail" class="form-input-terminal" placeholder="your@email.com" required>
                     </div>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label class="block text-sm font-semibold mb-2">Website URL</label>
+                        <label class="block text-sm font-bold mb-3 text-white">Website URL</label>
                         <input type="url" id="userWebsite" class="form-input-terminal" placeholder="https://yoursite.com">
                     </div>
                     <div>
-                        <label class="block text-sm font-semibold mb-2">City *</label>
+                        <label class="block text-sm font-bold mb-3 text-white">City *</label>
                         <input type="text" id="userCity" class="form-input-terminal" placeholder="Your city" required>
                     </div>
                 </div>
 
-                <button type="submit" class="btn-glow w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 py-4 rounded-xl font-bold text-white transition transform hover:scale-105 shadow-lg text-lg">
-                    Start Free Trial Today
+                <button type="submit" class="btn-glow w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 py-5 rounded-xl font-bold text-white transition transform hover:scale-105 shadow-xl text-lg mt-8">
+                    Get Instant Access <i class="ri-arrow-right-line ml-2"></i>
                 </button>
 
                 <p class="text-center text-sm text-gray-400">
-                    🔒 No credit card required. 14-day free trial. Cancel anytime.
+                    🔒 No credit card required. 14-day free trial. Enterprise-grade tools.
                 </p>
             </form>
         </div>
     </div>
 </section>
 
-<!-- FAQ Section -->
-<section class="w-full py-16 md:py-32 px-4 sm:px-6 lg:px-8 section-gradient">
+<!-- How It Works - DETAILED ROADMAP -->
+<section id="workflow" class="w-full py-20 md:py-40 px-4 sm:px-6 lg:px-8 section-unified relative">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-20" data-aos="fade-up">
+            <h2 class="text-4xl md:text-6xl font-bold mb-6">
+                Implementation <span class="gradient-text-dynamic">Roadmap</span>
+            </h2>
+            <p class="text-lg text-gray-400 max-w-3xl mx-auto">Get started in minutes. Our streamlined workflow takes you from zero to ranking hero in just a few simple steps.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Step 1 -->
+            <div class="roadmap-step group" data-aos="fade-up" data-aos-delay="0">
+                <div class="glass card-hover-glow p-8 border border-indigo-500/40 h-full text-center bg-gradient-to-br from-indigo-500/10 to-purple-500/10">
+                    <div class="w-16 h-16 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-2xl flex items-center justify-center text-white font-bold text-2xl mx-auto mb-6 group-hover:scale-110 transition-transform">
+                        1
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Create Account</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-4">Sign up in seconds and get instant access to all enterprise features. No payment required for 14 days.</p>
+                    <div class="text-xs text-indigo-400 font-semibold">⏱️ Takes 2 minutes</div>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="roadmap-step group" data-aos="fade-up" data-aos-delay="100">
+                <div class="glass card-hover-glow p-8 border border-cyan-500/40 h-full text-center bg-gradient-to-br from-cyan-500/10 to-blue-500/10">
+                    <div class="w-16 h-16 bg-gradient-to-br from-cyan-600 to-blue-600 rounded-2xl flex items-center justify-center text-white font-bold text-2xl mx-auto mb-6 group-hover:scale-110 transition-transform">
+                        2
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Setup Keywords</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-4">Import your target keywords or add them manually. Connect your Google Search Console for data sync.</p>
+                    <div class="text-xs text-cyan-400 font-semibold">📊 Supports 100+ sources</div>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="roadmap-step group" data-aos="fade-up" data-aos-delay="200">
+                <div class="glass card-hover-glow p-8 border border-purple-500/40 h-full text-center bg-gradient-to-br from-purple-500/10 to-pink-500/10">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl flex items-center justify-center text-white font-bold text-2xl mx-auto mb-6 group-hover:scale-110 transition-transform">
+                        3
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Track & Monitor</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-4">Our AI starts tracking rankings 24/7. See real-time updates and get alerts for significant changes instantly.</p>
+                    <div class="text-xs text-purple-400 font-semibold">🔔 Real-time alerts</div>
+                </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="roadmap-step group" data-aos="fade-up" data-aos-delay="300">
+                <div class="glass card-hover-glow p-8 border border-emerald-500/40 h-full text-center bg-gradient-to-br from-emerald-500/10 to-teal-500/10">
+                    <div class="w-16 h-16 bg-gradient-to-br from-emerald-600 to-teal-600 rounded-2xl flex items-center justify-center text-white font-bold text-2xl mx-auto mb-6 group-hover:scale-110 transition-transform">
+                        4
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Get Insights & Scale</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-4">Receive AI-powered recommendations. Access detailed competitor analysis and optimization strategies.</p>
+                    <div class="text-xs text-emerald-400 font-semibold">🚀 Scale your rankings</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Reviews Section - ATTRACTIVE DESIGN -->
+<section id="reviews" class="w-full py-20 md:py-40 px-4 sm:px-6 lg:px-8 section-unified">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-20" data-aos="fade-up">
+            <h2 class="text-4xl md:text-6xl font-bold mb-6">
+                Loved by <span class="gradient-text-dynamic">Professionals</span>
+            </h2>
+            <p class="text-lg text-gray-400 max-w-3xl mx-auto">See what industry leaders and SEO experts say about RankIQ</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Review 1 -->
+            <div class="glass review-card-animated card-hover-glow p-8 border border-indigo-500/30" data-aos="fade-up" data-aos-delay="0">
+                <div class="flex items-center gap-1 mb-4">
+                    <i class="ri-star-fill text-yellow-400 text-lg"></i>
+                    <i class="ri-star-fill text-yellow-400 text-lg"></i>
+                    <i class="ri-star-fill text-yellow-400 text-lg"></i>
+                    <i class="ri-star-fill text-yellow-400 text-lg"></i>
+                    <i class="ri-star-fill text-yellow-400 text-lg"></i>
+                </div>
+                <p class="text-gray-300 leading-relaxed mb-6 text-base">"RankIQ completely transformed how we manage SEO. The real-time tracking and AI insights helped us rank for 500+ competitive keywords in 6 months."</p>
+                <div class="flex items-center gap-3 pt-4 border-t border-white/10">
+                    <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-lg">JP</div>
+                    <div>
+                        <h4 class="font-bold text-white">John Parker</h4>
+                        <p class="text-xs text-gray-400">SEO Director, TechGrowth Inc.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 2 -->
+            <div class="glass review-card-animated card-hover-glow p-8 border border-cyan-500/30" data-aos="fade-up" data-aos-delay="100">
+                <div class="flex items-center gap-1 mb-4">
+                    <i class="ri-star-fill text-yellow-400 text-lg"></i>
+                    <i class="ri-star-fill text-yellow-400 text-lg"></i>
+                    <i class="ri-star-fill text-yellow-400 text-lg"></i>
+                    <i class="ri-star-fill text-yellow-400 text-lg"></i>
+                    <i class="ri-star-fill text-yellow-400 text-lg"></i>
+                </div>
+                <p class="text-gray-300 leading-relaxed mb-6 text-base">"The best SEO platform I've ever used. Competitor analysis feature alone is worth the investment. Customer support is phenomenal and always helpful."</p>
+                <div class="flex items-center gap-3 pt-4 border-t border-white/10">
+                    <div class="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-full flex items-center justify-center text-white font-bold text-lg">SA</div>
+                    <div>
+                        <h4 class="font-bold text-white">Sarah Anderson</h4>
+                        <p class="text-xs text-gray-400">Digital Marketing Manager</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 3 -->
+            <div class="glass review-card-animated card-hover-glow p-8 border border-purple-500/30" data-aos="fade-up" data-aos-delay="200">
+                <div class="flex items-center gap-1 mb-4">
+                    <i class="ri-star-fill text-yellow-400 text-lg"></i>
+                    <i class="ri-star-fill text-yellow-400 text-lg"></i>
+                    <i class="ri-star-fill text-yellow-400 text-lg"></i>
+                    <i class="ri-star-fill text-yellow-400 text-lg"></i>
+                    <i class="ri-star-fill text-yellow-400 text-lg"></i>
+                </div>
+                <p class="text-gray-300 leading-relaxed mb-6 text-base">"Excellent platform with constant updates and new features. The ROI is incredible - we've increased our organic traffic by 300% in 8 months using RankIQ's insights."</p>
+                <div class="flex items-center gap-3 pt-4 border-t border-white/10">
+                    <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-lg">MK</div>
+                    <div>
+                        <h4 class="font-bold text-white">Michael Khan</h4>
+                        <p class="text-xs text-gray-400">Founder, Digital Strategies Co.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Stats -->
+        <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div class="glass p-6 text-center border border-indigo-500/20" data-aos="fade-up">
+                <div class="text-3xl font-bold text-indigo-400">4.9/5</div>
+                <p class="text-sm text-gray-400 mt-2">Average Rating</p>
+            </div>
+            <div class="glass p-6 text-center border border-cyan-500/20" data-aos="fade-up" data-aos-delay="50">
+                <div class="text-3xl font-bold text-cyan-400">12.5K+</div>
+                <p class="text-sm text-gray-400 mt-2">Happy Users</p>
+            </div>
+            <div class="glass p-6 text-center border border-purple-500/20" data-aos="fade-up" data-aos-delay="100">
+                <div class="text-3xl font-bold text-purple-400">98%</div>
+                <p class="text-sm text-gray-400 mt-2">Retention Rate</p>
+            </div>
+            <div class="glass p-6 text-center border border-emerald-500/20" data-aos="fade-up" data-aos-delay="150">
+                <div class="text-3xl font-bold text-emerald-400">24/7</div>
+                <p class="text-sm text-gray-400 mt-2">Support Available</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section - POWERFUL DESIGN -->
+<section id="faq" class="w-full py-20 md:py-40 px-4 sm:px-6 lg:px-8 section-unified">
     <div class="max-w-4xl mx-auto">
-        <div class="text-center mb-12 md:mb-20" data-aos="fade-up">
-            <h2 class="text-3xl md:text-5xl font-bold mb-4">Frequently Asked Questions</h2>
-            <p class="text-lg text-gray-400">Got questions? We've got answers</p>
+        <div class="text-center mb-16" data-aos="fade-up">
+            <h2 class="text-4xl md:text-6xl font-bold mb-6">
+                Frequently Asked <span class="gradient-text-dynamic">Questions</span>
+            </h2>
+            <p class="text-lg text-gray-400">Everything you need to know about RankIQ. Still have questions?</p>
         </div>
 
         <div class="space-y-4">
-            <details class="glass p-6 border border-indigo-500/20 rounded-lg cursor-pointer group" data-aos="fade-up">
-                <summary class="flex items-center justify-between font-bold text-lg">
-                    <span>How accurate are your ranking updates?</span>
-                    <i class="ri-add-fill group-open:rotate-45 transition-transform"></i>
+            <!-- FAQ 1 -->
+            <details class="faq-item-advanced glass border border-indigo-500/40 rounded-lg group" data-aos="fade-up">
+                <summary class="flex items-center justify-between font-bold text-lg cursor-pointer p-6 select-none">
+                    <span class="flex items-center gap-3">
+                        <i class="ri-add-circle-line text-2xl text-indigo-400 group-open:hidden"></i>
+                        <i class="ri-check-circle-line text-2xl text-indigo-400 hidden group-open:inline"></i>
+                        How accurate are your ranking updates?
+                    </span>
                 </summary>
-                <p class="text-gray-300 mt-4 leading-relaxed">Our AI-powered system updates keyword rankings every hour with 99.9% accuracy. We track millions of keywords across thousands of domains in real-time.</p>
+                <div class="px-6 pb-6 text-gray-300 leading-relaxed space-y-3 border-t border-white/10 pt-6">
+                    <p>Our AI-powered system updates keyword rankings every hour with 99.9% accuracy. We track millions of keywords across Google, Bing, and other search engines simultaneously.</p>
+                    <p>Key features:</p>
+                    <ul class="list-disc list-inside space-y-2 pl-3">
+                        <li>Hourly ranking updates</li>
+                        <li>Multi-search engine tracking</li>
+                        <li>99.9% data accuracy</li>
+                        <li>Local and global insights</li>
+                    </ul>
+                </div>
             </details>
 
-            <details class="glass p-6 border border-cyan-500/20 rounded-lg cursor-pointer group" data-aos="fade-up" data-aos-delay="100">
-                <summary class="flex items-center justify-between font-bold text-lg">
-                    <span>What's included in the free trial?</span>
-                    <i class="ri-add-fill group-open:rotate-45 transition-transform"></i>
+            <!-- FAQ 2 -->
+            <details class="faq-item-advanced glass border border-cyan-500/40 rounded-lg group" data-aos="fade-up" data-aos-delay="100">
+                <summary class="flex items-center justify-between font-bold text-lg cursor-pointer p-6 select-none">
+                    <span class="flex items-center gap-3">
+                        <i class="ri-add-circle-line text-2xl text-cyan-400 group-open:hidden"></i>
+                        <i class="ri-check-circle-line text-2xl text-cyan-400 hidden group-open:inline"></i>
+                        What's included in the 14-day free trial?
+                    </span>
                 </summary>
-                <p class="text-gray-300 mt-4 leading-relaxed">Full access to all features including real-time tracking, competitor analysis, and AI insights. You can track up to 100 keywords during your 14-day trial.</p>
+                <div class="px-6 pb-6 text-gray-300 leading-relaxed space-y-3 border-t border-white/10 pt-6">
+                    <p>Full access to all enterprise features including:</p>
+                    <ul class="list-disc list-inside space-y-2 pl-3">
+                        <li>Real-time keyword tracking (500 keywords)</li>
+                        <li>Competitor analysis tools</li>
+                        <li>AI-powered recommendations</li>
+                        <li>Advanced reporting suite</li>
+                        <li>API access</li>
+                        <li>Priority support</li>
+                    </ul>
+                    <p>No credit card required. Cancel anytime.</p>
+                </div>
             </details>
 
-            <details class="glass p-6 border border-purple-500/20 rounded-lg cursor-pointer group" data-aos="fade-up" data-aos-delay="200">
-                <summary class="flex items-center justify-between font-bold text-lg">
-                    <span>Do you offer API access?</span>
-                    <i class="ri-add-fill group-open:rotate-45 transition-transform"></i>
+            <!-- FAQ 3 -->
+            <details class="faq-item-advanced glass border border-purple-500/40 rounded-lg group" data-aos="fade-up" data-aos-delay="200">
+                <summary class="flex items-center justify-between font-bold text-lg cursor-pointer p-6 select-none">
+                    <span class="flex items-center gap-3">
+                        <i class="ri-add-circle-line text-2xl text-purple-400 group-open:hidden"></i>
+                        <i class="ri-check-circle-line text-2xl text-purple-400 hidden group-open:inline"></i>
+                        Do you offer API access and integrations?
+                    </span>
                 </summary>
-                <p class="text-gray-300 mt-4 leading-relaxed">Yes! We provide comprehensive REST API documentation for all plan levels. Developers can integrate RankIQ data into their own applications and workflows.</p>
+                <div class="px-6 pb-6 text-gray-300 leading-relaxed space-y-3 border-t border-white/10 pt-6">
+                    <p>Yes! We provide comprehensive REST API documentation and webhooks. Integrate with:</p>
+                    <ul class="list-disc list-inside space-y-2 pl-3">
+                        <li>Slack for notifications</li>
+                        <li>Zapier for automation</li>
+                        <li>HubSpot for CRM sync</li>
+                        <li>Google Sheets for data export</li>
+                        <li>Custom integrations via webhooks</li>
+                    </ul>
+                    <p>API available on all plans starting from Professional tier.</p>
+                </div>
             </details>
 
-            <details class="glass p-6 border border-green-500/20 rounded-lg cursor-pointer group" data-aos="fade-up" data-aos-delay="300">
-                <summary class="flex items-center justify-between font-bold text-lg">
-                    <span>What payment methods do you accept?</span>
-                    <i class="ri-add-fill group-open:rotate-45 transition-transform"></i>
+            <!-- FAQ 4 -->
+            <details class="faq-item-advanced glass border border-emerald-500/40 rounded-lg group" data-aos="fade-up" data-aos-delay="300">
+                <summary class="flex items-center justify-between font-bold text-lg cursor-pointer p-6 select-none">
+                    <span class="flex items-center gap-3">
+                        <i class="ri-add-circle-line text-2xl text-emerald-400 group-open:hidden"></i>
+                        <i class="ri-check-circle-line text-2xl text-emerald-400 hidden group-open:inline"></i>
+                        What security measures do you have?
+                    </span>
                 </summary>
-                <p class="text-gray-300 mt-4 leading-relaxed">We accept all major credit cards, PayPal, and bank transfers for enterprise customers. All payments are processed securely through Stripe.</p>
+                <div class="px-6 pb-6 text-gray-300 leading-relaxed space-y-3 border-t border-white/10 pt-6">
+                    <p>Enterprise-grade security with:</p>
+                    <ul class="list-disc list-inside space-y-2 pl-3">
+                        <li>AES-256 encryption for data at rest</li>
+                        <li>TLS 1.3 for data in transit</li>
+                        <li>Two-factor authentication (2FA)</li>
+                        <li>SOC2 Type II certified</li>
+                        <li>GDPR compliant</li>
+                        <li>Regular security audits</li>
+                        <li>99.99% uptime SLA</li>
+                    </ul>
+                </div>
+            </details>
+
+            <!-- FAQ 5 -->
+            <details class="faq-item-advanced glass border border-pink-500/40 rounded-lg group" data-aos="fade-up" data-aos-delay="400">
+                <summary class="flex items-center justify-between font-bold text-lg cursor-pointer p-6 select-none">
+                    <span class="flex items-center gap-3">
+                        <i class="ri-add-circle-line text-2xl text-pink-400 group-open:hidden"></i>
+                        <i class="ri-check-circle-line text-2xl text-pink-400 hidden group-open:inline"></i>
+                        What payment methods do you accept?
+                    </span>
+                </summary>
+                <div class="px-6 pb-6 text-gray-300 leading-relaxed space-y-3 border-t border-white/10 pt-6">
+                    <p>We accept multiple payment methods:</p>
+                    <ul class="list-disc list-inside space-y-2 pl-3">
+                        <li>All major credit cards (Visa, Mastercard, Amex)</li>
+                        <li>PayPal</li>
+                        <li>Bank transfers (ACH)</li>
+                        <li>Wire transfers for enterprise</li>
+                    </ul>
+                    <p>Monthly and annual billing options available. Annual plans include 25% off.</p>
+                </div>
             </details>
         </div>
     </div>
 </section>
 
 <!-- Footer -->
-<footer class="w-full py-8 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-6xl mx-auto">
-        <div class="nav-terminal px-6 py-8 rounded-3xl">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+<footer class="w-full py-12 px-4 sm:px-6 lg:px-8 section-unified relative">
+    <div class="max-w-7xl mx-auto">
+        <div class="nav-terminal px-8 py-12 rounded-3xl mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-8 mb-12">
                 <!-- Brand -->
-                <div class="col-span-1 md:col-span-1">
-                    <div class="flex items-center gap-2 mb-4">
-                        <i class="ri-blaze-fill text-2xl text-red-500"></i>
-                        <h3 class="text-lg font-bold">RankIQ</h3>
+                <div class="col-span-1">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="ri-blaze-fill text-2xl logo-dynamic"></i>
+                        <h3 class="text-lg font-bold logo-dynamic-secondary">RankIQ</h3>
                     </div>
-                    <p class="text-sm text-gray-400">Professional SEO analytics platform</p>
+                    <p class="text-sm text-gray-400 leading-relaxed">Professional SEO analytics platform for ambitious marketers.</p>
                 </div>
 
-                <!-- Product -->
+                <!-- Product Links -->
                 <div>
-                    <h4 class="font-bold mb-4">Product</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition">Features</a></li>
+                    <h4 class="font-bold mb-4 text-white">Product</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#features" class="text-gray-400 hover:text-white transition">Features</a></li>
                         <li><a href="#" class="text-gray-400 hover:text-white transition">Pricing</a></li>
                         <li><a href="#" class="text-gray-400 hover:text-white transition">API Docs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Changelog</a></li>
                     </ul>
                 </div>
 
-                <!-- Company -->
+                <!-- Company Links -->
                 <div>
-                    <h4 class="font-bold mb-4">Company</h4>
-                    <ul class="space-y-2 text-sm">
+                    <h4 class="font-bold mb-4 text-white">Company</h4>
+                    <ul class="space-y-3 text-sm">
                         <li><a href="#" class="text-gray-400 hover:text-white transition">About</a></li>
                         <li><a href="#" class="text-gray-400 hover:text-white transition">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Careers</a></li>
                         <li><a href="#" class="text-gray-400 hover:text-white transition">Contact</a></li>
                     </ul>
                 </div>
 
-                <!-- Legal -->
+                <!-- Resources Links -->
                 <div>
-                    <h4 class="font-bold mb-4">Legal</h4>
-                    <ul class="space-y-2 text-sm">
+                    <h4 class="font-bold mb-4 text-white">Resources</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Guides</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Community</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Status</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal Links -->
+                <div>
+                    <h4 class="font-bold mb-4 text-white">Legal</h4>
+                    <ul class="space-y-3 text-sm">
                         <li><a href="#" class="text-gray-400 hover:text-white transition">Privacy</a></li>
                         <li><a href="#" class="text-gray-400 hover:text-white transition">Terms</a></li>
                         <li><a href="#" class="text-gray-400 hover:text-white transition">Security</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Compliance</a></li>
                     </ul>
                 </div>
             </div>
 
-            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-sm text-gray-400">© 2024 RankIQ. All rights reserved.</p>
-                <div class="flex gap-4 mt-4 md:mt-0">
-                    <a href="#" class="text-gray-400 hover:text-white transition text-xl"><i class="ri-twitter-x-line"></i></a>
-                    <a href="#" class="text-gray-400 hover:text-white transition text-xl"><i class="ri-linkedin-box-line"></i></a>
-                    <a href="#" class="text-gray-400 hover:text-white transition text-xl"><i class="ri-facebook-box-line"></i></a>
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
+                <p class="text-sm text-gray-400">© 2024 RankIQ by Pixora Graphics. All rights reserved.</p>
+                <div class="flex gap-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition text-xl transform hover:scale-110">
+                        <i class="ri-twitter-x-line"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition text-xl transform hover:scale-110">
+                        <i class="ri-linkedin-box-line"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition text-xl transform hover:scale-110">
+                        <i class="ri-github-line"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition text-xl transform hover:scale-110">
+                        <i class="ri-facebook-box-line"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -690,7 +1075,7 @@
         // Update Vanta background
         if (vantaInstance) {
             vantaInstance.destroy();
-            initVanta();
+            setTimeout(initVanta, 100);
         }
     });
 
@@ -724,9 +1109,9 @@
             config.backgroundColor = 0x05060a;
             config.lineColor = 0x6366f1;
         } else {
-            config.color = 0x9CA3AF;
+            config.color = 0xAEBCFF;
             config.backgroundColor = 0xf8fafc;
-            config.lineColor = 0xd1d5db;
+            config.lineColor = 0xE0E7FF;
         }
 
         vantaInstance = VANTA.NET(config);
@@ -767,23 +1152,25 @@
                     title: 'Success!',
                     text: 'Your request has been sent. Check your email for next steps!',
                     icon: 'success',
-                    confirmButtonColor: '#6366F1'
+                    confirmButtonColor: '#6366F1',
+                    background: document.documentElement.getAttribute('data-theme') === 'dark' ? '#0D1020' : '#f1f5f9',
+                    color: document.documentElement.getAttribute('data-theme') === 'dark' ? '#ffffff' : '#0f172a'
                 });
                 contactForm.reset();
-            } else {
-                throw new Error('Form submission failed');
             }
         } catch (error) {
             Swal.fire({
                 title: 'Error!',
                 text: 'Something went wrong. Please try again.',
                 icon: 'error',
-                confirmButtonColor: '#6366F1'
+                confirmButtonColor: '#6366F1',
+                background: document.documentElement.getAttribute('data-theme') === 'dark' ? '#0D1020' : '#f1f5f9',
+                color: document.documentElement.getAttribute('data-theme') === 'dark' ? '#ffffff' : '#0f172a'
             });
         }
     });
 
-    // Smooth scroll for links
+    // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
@@ -805,9 +1192,6 @@
             navbar.style.top = '16px';
         }
     });
-
-    // Mobile menu toggle (optional - for future enhancement)
-    // Add hamburger menu functionality here if needed
 </script>
 
 </body>
