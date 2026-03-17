@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth dark">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RankIQ | The Ultimate AI SEO Automator</title>
+    <title>RankIQ | AI SEO Automation by Pixora Graphics</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     
@@ -12,7 +12,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
-            darkMode: 'class', // Forces dark mode
             theme: {
                 extend: {
                     fontFamily: { 
@@ -20,13 +19,11 @@
                         body: ['Inter', 'sans-serif']
                     },
                     colors: {
-                        darkBase: '#020202',    // Pure deepest black
-                        darkSurface: '#09090b', // Almost black
-                        darkCard: 'rgba(20, 20, 25, 0.4)', // True Glass
+                        darkBase: '#020202',    // True Obsidian Black
+                        darkSurface: '#09090b', // Enterprise dark gray
                         primary: '#6366f1',     // Vibrant Indigo
                         secondary: '#a855f7',   // Vibrant Purple
                         accent: '#06b6d4',      // Vibrant Cyan
-                        textMain: '#ffffff',
                         textMuted: '#94a3b8'
                     }
                 }
@@ -40,44 +37,30 @@
         
         body { 
             background-color: theme('colors.darkBase'); 
-            color: theme('colors.textMain'); 
+            color: #ffffff; 
             overflow-x: hidden;
-            position: relative;
+            font-family: 'Space Grotesk', sans-serif;
         }
 
-        /* --- Animated Mesh Gradient Background (Next Level Look) --- */
-        .ambient-bg {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            z-index: -2; overflow: hidden; background: #020202; pointer-events: none;
-        }
-        .orb {
-            position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.4;
-            animation: float 20s infinite ease-in-out alternate;
-        }
-        .orb-1 { width: 50vw; height: 50vw; background: rgba(99, 102, 241, 0.15); top: -20%; left: -10%; }
-        .orb-2 { width: 40vw; height: 40vw; background: rgba(168, 85, 247, 0.15); bottom: -10%; right: -10%; animation-delay: -5s; }
-        .orb-3 { width: 30vw; height: 30vw; background: rgba(6, 182, 212, 0.1); top: 40%; left: 40%; animation-delay: -10s; }
-
-        @keyframes float {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(50px, 50px) scale(1.1); }
-        }
-
-        /* Custom Scrollbar */
+        /* --- Custom Scrollbar --- */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #020202; }
         ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: theme('colors.primary'); }
 
-        /* --- TRUE Glassmorphism --- */
-        .glass-nav {
-            background: rgba(2, 2, 2, 0.6);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        /* --- High Contrast Typography --- */
+        .text-gradient {
+            background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .text-gradient-primary {
+            background: linear-gradient(135deg, theme('colors.primary'), theme('colors.accent'));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
+        /* --- PERFECTED: True Glassmorphism 2.0 (Apple Style) --- */
         .glass-card {
-            background: theme('colors.darkCard');
+            background: rgba(20, 20, 25, 0.4);
             backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
@@ -90,17 +73,61 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 40px rgba(99, 102, 241, 0.1);
         }
 
-        /* Typography Enhancements */
-        .text-gradient {
-            background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        /* --- PERFECTED: 3D Floating Pill 'Terminal' Navbar --- */
+        .floating-nav {
+            position: fixed; top: 20px; left: 50%;
+            transform: translateX(-50%) translateY(0);
+            width: calc(100% - 40px); max-width: 900px;
+            background: rgba(10, 10, 12, 0.7);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 
+                        inset 0 10px 10px rgba(255, 255, 255, 0.03), 
+                        0 0 30px rgba(99, 102, 241, 0.15); /* Primary glow */
+            padding: 15px 30px; z-index: 1000;
+            transition: all 0.4s ease;
+            animation: float-3d-navbar 6s ease-in-out infinite;
         }
-        .text-gradient-primary {
-            background: linear-gradient(135deg, theme('colors.primary'), theme('colors.accent'));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        
+        @keyframes float-3d-navbar {
+            0% { transform: translateX(-50%) translateY(0); box-shadow: 0 20px 50px rgba(0,0,0,0.8); }
+            50% { transform: translateX(-50%) translateY(-5px); box-shadow: 0 25px 60px rgba(0,0,0,0.8); }
+            100% { transform: translateX(-50%) translateY(0); box-shadow: 0 20px 50px rgba(0,0,0,0.8); }
         }
 
-        /* Input Fields (High Contrast) */
+        .floating-nav:hover {
+            border-color: rgba(99, 102, 241, 0.4);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(99, 102, 241, 0.3);
+            animation-play-state: paused; /* Pause animation on hover for precision clicking */
+        }
+        
+        /* Visually styled like console output (Terminal look) */
+        .terminal-link-indicator { color: theme('colors.primary'); margin-right: 3px;}
+        .floating-nav:hover .terminal-link-indicator { opacity: 1; }
+
+        /* --- PERFECTED: Architecture Pipeline (Live Animated) --- */
+        .pipeline-line {
+            position: absolute; left: 23px; top: 40px; bottom: 0; width: 2px;
+            background: linear-gradient(to bottom, theme('colors.primary'), theme('colors.secondary'), theme('colors.accent'));
+            opacity: 0.3; z-index: 0;
+        }
+        .pipeline-flow-indicator {
+            position: absolute; left: 21px; width: 6px; height: 30%;
+            background: linear-gradient(to bottom, transparent, #fff, transparent);
+            box-shadow: 0 0 10px #fff; border-radius: 5px;
+            animation: pipeline-flow-indicator-anim 4s linear infinite;
+        }
+        @keyframes pipeline-flow-indicator-anim { 0% { top: 0; } 100% { top: 70%; } }
+        
+        /* FAQ styling (Glassmorphism + high contrast text) */
+        .faq-item { transition: all 0.3s ease; border: 1px solid rgba(255, 255, 255, 0.05); }
+        .faq-item:hover { border-color: rgba(255, 255, 255, 0.15); background: rgba(255,255,255,0.02); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-in-out; opacity: 0; }
+        .faq-item.active .faq-answer { max-height: 300px; opacity: 1; margin-top: 1rem; }
+        .faq-item.active .faq-icon { transform: rotate(180deg); color: theme('colors.primary'); }
+
+        /* --- High Contrast input fields --- */
         .input-wrapper { position: relative; width: 100%; }
         .input-field {
             width: 100%; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.15);
@@ -116,75 +143,51 @@
             transform: translateY(-0.8rem) scale(0.8); left: 1rem; color: theme('colors.primary');
         }
 
-        /* Pipeline Enhancements */
-        .pipeline-line {
-            position: absolute; left: 23px; top: 40px; bottom: 0; width: 2px;
-            background: linear-gradient(to bottom, theme('colors.primary'), theme('colors.secondary'), theme('colors.accent'));
-            opacity: 0.3; z-index: 0;
-        }
-        
-        /* FAQ Styling */
-        .faq-item { transition: all 0.3s ease; }
-        .faq-item:hover { border-color: rgba(255,255,255,0.15); background: rgba(255,255,255,0.02); }
-        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-in-out; opacity: 0; }
-        .faq-item.active .faq-answer { max-height: 300px; opacity: 1; margin-top: 1rem; }
-        .faq-item.active .faq-icon { transform: rotate(180deg); color: theme('colors.primary'); }
-
     </style>
 </head>
-<body class="antialiased selection:bg-primary selection:text-white">
+<body class="antialiased selection:bg-primary selection:text-white relative">
 
-    <div class="ambient-bg">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-        <div class="orb orb-3"></div>
-    </div>
-
-    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden" id="hero-bg">
+        <nav class="floating-nav transition-all duration-300">
+            <div class="flex items-center justify-between">
                 <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg shadow-primary/20">
-                        <i class="ri-blaze-fill text-2xl text-white"></i>
-                    </div>
+                    <i class="ri-blaze-fill text-3xl text-primary"></i>
                     <div>
                         <span class="font-bold text-2xl tracking-tighter text-white">RankIQ</span>
-                        <span class="block text-[0.6rem] text-primary font-bold uppercase tracking-widest -mt-1">by Pixora Graphics</span>
+                        <span class="block text-[0.6rem] text-gray-400 uppercase tracking-widest -mt-1">by Pixora Graphics</span>
                     </div>
                 </div>
                 <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-8">
-                        <a href="#about" class="text-textMuted hover:text-white transition-colors text-sm font-medium">Platform</a>
-                        <a href="#workflow" class="text-textMuted hover:text-white transition-colors text-sm font-medium">Architecture</a>
+                    <div class="ml-10 flex items-baseline space-x-6">
+                        <a href="#about" class="text-textMuted hover:text-white transition-colors text-sm font-medium"><span class="terminal-link-indicator opacity-0">&gt;</span> about</a>
+                        <a href="#workflow" class="text-textMuted hover:text-white transition-colors text-sm font-medium"><span class="terminal-link-indicator opacity-0">&gt;</span> architecture</a>
                         <a href="#deploy" class="bg-white text-black hover:bg-gray-200 px-6 py-2.5 rounded-full text-sm font-bold transition-all shadow-[0_0_15px_rgba(255,255,255,0.2)]">
-                            Launch Console
+                            Launch Console <i class="ri-terminal-box-line ml-1"></i>
                         </a>
                     </div>
                 </div>
             </div>
-        </div>
-    </nav>
+        </nav>
 
-    <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden" id="hero-bg">
         <div class="absolute inset-0 bg-darkBase/70 z-0"></div>
         
-        <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center mt-10">
-            <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-white/10 bg-white/5 text-xs font-semibold text-white mb-8 gs-reveal backdrop-blur-md">
+        <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center mt-20 md:mt-10">
+            <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-white/10 bg-white/5 text-xs font-semibold text-white mb-10 gs-reveal backdrop-blur-md">
                 <span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span></span>
                 N8N CLOUD INFRASTRUCTURE ONLINE
             </div>
             
-            <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-6 leading-tight gs-reveal text-white">
-                Dominate Search With <br /><span class="text-gradient-primary">Artificial Intelligence.</span>
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-8 leading-tight gs-reveal text-white">
+                Simple AI SEO <br /><span class="text-gradient-primary">for Beginners.</span>
             </h1>
             
-            <p class="mt-4 max-w-2xl mx-auto text-lg md:text-xl text-textMuted mb-12 gs-reveal font-body leading-relaxed">
-                RankIQ reverse-engineers your top local competitors and synthesizes a hyper-personalized, 30-day execution masterplan to claim the #1 spot.
+            <p class="mt-4 max-w-2xl mx-auto text-lg md:text-xl text-textMuted mb-14 gs-reveal font-body leading-relaxed">
+                RankIQ reads your website, looks at your local competitors, and gives you a clear 30-day step-by-step masterplan to rank #1.
             </p>
             
             <div class="flex flex-col sm:flex-row justify-center gap-5 gs-reveal">
                 <a href="#deploy" class="group relative px-8 py-4 bg-white text-black font-bold rounded-full transition-all hover:scale-105 shadow-[0_0_30px_rgba(255,255,255,0.15)] hover:shadow-[0_0_40px_rgba(255,255,255,0.3)]">
-                    Initialize Deployment <i class="ri-arrow-right-line ml-2 group-hover:translate-x-1 transition-transform inline-block"></i>
+                    Create My Masterplan <i class="ri-ai-generate ml-2 group-hover:translate-x-1 transition-transform inline-block"></i>
                 </a>
             </div>
         </div>
@@ -193,51 +196,46 @@
     <section id="about" class="py-32 relative z-10">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-20 gs-up">
-                <h2 class="text-primary font-bold tracking-widest uppercase text-xs mb-4">Enterprise Grade UI</h2>
-                <h3 class="text-4xl md:text-5xl font-bold mb-6 text-white tracking-tight">Engineered for <span class="text-gradient">Supremacy.</span></h3>
-                <p class="text-textMuted text-lg font-body">Traditional tools give you overwhelming charts. RankIQ gives you absolute clarity and a weaponized execution strategy.</p>
+                <h2 class="text-primary font-bold tracking-widest uppercase text-xs mb-4">PLATFORM BENEFITS</h2>
+                <h3 class="text-4xl md:text-5xl font-bold mb-6 text-white tracking-tight">Simple. Clear. <span class="text-gradient">Beginner-Friendly.</span></h3>
+                <p class="text-textMuted text-lg font-bodyleading-relaxed">Traditional tools give you overwhelming charts. RankIQ gives you absolute clarity and a weaponized execution strategy in plain English.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[300px]">
                 
-                <div class="md:col-span-2 glass-card rounded-[2rem] p-10 relative overflow-hidden group gs-up">
+                <div class="md:col-span-2 glass-card rounded-[2.5rem] p-10 relative overflow-hidden group gs-up">
                     <div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     <div class="relative z-10 h-full flex flex-col justify-between">
                         <div>
                             <div class="w-14 h-14 rounded-2xl bg-primary/20 flex items-center justify-center mb-6 border border-primary/30">
-                                <i class="ri-brain-line text-3xl text-primary"></i>
+                                <i class="ri-global-line text-3xl text-primary"></i>
                             </div>
-                            <h4 class="text-3xl font-bold text-white mb-3">Neural Web Scraping</h4>
-                            <p class="text-textMuted font-body max-w-lg leading-relaxed">Our advanced HTTP request engine bypasses standard blockers, reading your website's source code and context exactly like a human visitor to understand your true business category.</p>
+                            <h4 class="text-3xl font-bold text-white mb-3">Smart Website Reading</h4>
+                            <p class="text-textMuted font-body leading-relaxed max-w-lg">Our AI reads your website content just like a human visitor. It understands exactly what you do without you having to configure technical settings.</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="glass-card rounded-[2rem] p-10 relative overflow-hidden group gs-up" style="transition-delay: 100ms;">
-                    <div class="w-14 h-14 rounded-2xl bg-secondary/20 flex items-center justify-center mb-6 border border-secondary/30">
-                        <i class="ri-radar-line text-3xl text-secondary"></i>
-                    </div>
-                    <h4 class="text-2xl font-bold text-white mb-3">Hyper-Local Recon</h4>
-                    <p class="text-textMuted font-body leading-relaxed text-sm">We don't search globally. We use premium APIs to pinpoint search results exactly from your target city.</p>
+                <div class="glass-card rounded-[2.5rem] p-10 relative overflow-hidden group gs-up" style="transition-delay: 100ms;">
+                    <i class="ri-radar-line text-3xl text-secondary mb-6 block"></i>
+                    <h4 class="text-2xl font-bold text-white mb-3">Local City Analysis</h4>
+                    <p class="text-textMuted text-sm font-body leading-relaxed">We look at search results from your specific city. We find the Top 3 businesses dominating your niche and find their secrets.</p>
                 </div>
 
-                <div class="glass-card rounded-[2rem] p-10 relative overflow-hidden group gs-up" style="transition-delay: 200ms;">
-                    <div class="w-14 h-14 rounded-2xl bg-accent/20 flex items-center justify-center mb-6 border border-accent/30">
-                        <i class="ri-calendar-check-line text-3xl text-accent"></i>
-                    </div>
-                    <h4 class="text-2xl font-bold text-white mb-3">30-Day Blueprint</h4>
-                    <p class="text-textMuted font-body leading-relaxed text-sm">Gemini Pro synthesizes the data into a perfectly formatted, day-by-day HTML execution report.</p>
+                <div class="glass-card rounded-[2.5rem] p-10 relative overflow-hidden group gs-up" style="transition-delay: 200ms;">
+                    <i class="ri-calendar-check-line text-3xl text-accent mb-6 block"></i>
+                    <h4 class="text-2xl font-bold text-white mb-3">Simple Daily Plan</h4>
+                    <p class="text-textMuted text-sm font-body leading-relaxed">Gemini Pro creates a clear 30-day plan. You get one easy task every day in a simple email report.</p>
                 </div>
 
-                <div class="md:col-span-2 glass-card rounded-[2rem] p-10 relative overflow-hidden group border-t border-primary/40 bg-gradient-to-b from-primary/10 to-transparent gs-up" style="transition-delay: 300ms;">
+                <div class="md:col-span-2 glass-card rounded-[2.5rem] p-10 relative overflow-hidden group border-t border-primary/40 bg-primary/5 gs-up" style="transition-delay: 300ms;">
                     <div class="flex items-center justify-between h-full">
                         <div class="max-w-md">
-                            <h4 class="text-3xl font-bold text-white mb-4">Zero Touch Automation</h4>
-                            <p class="text-textMuted font-body leading-relaxed">From the moment you click deploy, n8n handles the complex 5-node routing seamlessly. No human error. Instant delivery.</p>
+                            <h4 class="text-3xl font-bold text-white mb-4">Zero Error Automation</h4>
+                            <p class="text-textMuted font-body leading-relaxed">The entire process is automated via our secure n8n architecture shown in our workflow. There is no human error. You get your report instantly.</p>
                         </div>
-                        <div class="hidden md:flex items-center justify-center w-32 h-32 rounded-full border border-white/10 bg-white/5 relative">
-                            <i class="ri-settings-4-fill text-5xl text-white/80 animate-[spin_8s_linear_infinite]"></i>
-                            <div class="absolute inset-0 rounded-full border-t-2 border-primary animate-[spin_3s_linear_infinite]"></div>
+                        <div class="hidden md:flex items-center justify-center w-32 h-32 rounded-full border border-white/10 bg-white/5 animate-[spin_10s_linear_infinite]">
+                            <i class="ri-settings-4-fill text-5xl text-white/80 animate-pulse"></i>
                         </div>
                     </div>
                 </div>
@@ -246,25 +244,24 @@
         </div>
     </section>
 
-    <section id="workflow" class="py-32 relative z-10">
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
-        
+    <section id="workflow" class="py-32 bg-darkSurface border-y border-white/5 relative z-10 gs-up">
         <div class="max-w-5xl mx-auto px-6 lg:px-8">
             <div class="text-center mb-24 gs-up">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-white">The <span class="text-gradient-primary">n8n Logic Pipeline</span></h2>
-                <p class="text-textMuted font-body text-lg">A transparent look into our exact 5-step automation routing.</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-white">Our Exact <span class="text-gradient-primary">5-Step Logic</span></h2>
+                <p class="text-textMuted font-body text-lg">A transparent look into our 5-node routing architecture, simple enough for anyone.</p>
             </div>
 
-            <div class="relative gs-up">
+            <div class="relative max-w-3xl mx-auto gs-up">
                 <div class="pipeline-line hidden md:block md:left-1/2 md:-ml-[1px]"></div>
+                <div class="pipeline-flow-indicator hidden md:block"></div>
                 
                 <div class="space-y-16">
                     <div class="relative flex flex-col md:flex-row items-center justify-between w-full group">
                         <div class="order-2 md:order-1 md:w-5/12 text-center md:text-right pr-0 md:pr-10 mt-6 md:mt-0">
-                            <h4 class="text-2xl font-bold text-white mb-2">1. Webhook Payload</h4>
-                            <p class="text-textMuted font-body text-sm leading-relaxed">Captures Target URL, City, and Client Credentials instantly upon secure submission.</p>
+                            <h4 class="text-xl font-bold text-white mb-2">Step 1: Webhook Submission</h4>
+                            <p class="text-gray-500 font-body text-sm leading-relaxed">Captures your Target URL, Target City, and Email address instantly upon secure submission.</p>
                         </div>
-                        <div class="z-10 flex items-center justify-center w-14 h-14 bg-darkSurface border border-white/20 rounded-xl shadow-[0_0_30px_rgba(99,102,241,0.2)] order-1 md:order-2 group-hover:border-primary transition-colors">
+                        <div class="z-10 flex items-center justify-center w-14 h-14 bg-darkSurface border-2 border-primary rounded-xl node-pulse shadow-[0_0_20px_rgba(99,102,241,0.5)] order-1 md:order-2 transition-transform group-hover:scale-110 group-hover:border-primary group-hover:shadow-[0_0_30px_rgba(99,102,241,0.7)]">
                             <i class="ri-webhook-fill text-primary text-2xl"></i>
                         </div>
                         <div class="order-3 md:w-5/12 hidden md:block"></div>
@@ -272,24 +269,13 @@
 
                     <div class="relative flex flex-col md:flex-row items-center justify-between w-full group">
                         <div class="order-3 md:w-5/12 hidden md:block"></div>
-                        <div class="z-10 flex items-center justify-center w-14 h-14 bg-darkSurface border border-white/20 rounded-xl shadow-[0_0_30px_rgba(59,130,246,0.2)] order-1 md:order-2 group-hover:border-blue-500 transition-colors">
+                        <div class="z-10 flex items-center justify-center w-14 h-14 bg-darkSurface border border-white/20 rounded-xl group-hover:border-blue-500 order-1 md:order-2 transition-transform group-hover:scale-110">
                             <i class="ri-global-line text-blue-500 text-2xl"></i>
                         </div>
                         <div class="order-2 md:order-3 md:w-5/12 text-center md:text-left pl-0 md:pl-10 mt-6 md:mt-0">
-                            <h4 class="text-2xl font-bold text-white mb-2">2. Site Scraper Node</h4>
-                            <p class="text-textMuted font-body text-sm leading-relaxed">HTTP Request executes a GET command to extract the raw HTML structure of the client's business.</p>
+                            <h4 class="text-xl font-bold text-white mb-2">Step 2: Scrape Site Node</h4>
+                            <p class="text-gray-500 font-body text-sm leading-relaxed">HTTP Request executing real-time data fetch to extract the raw text structure of your website.</p>
                         </div>
-                    </div>
-
-                    <div class="relative flex flex-col md:flex-row items-center justify-between w-full group">
-                        <div class="order-2 md:order-1 md:w-5/12 text-center md:text-right pr-0 md:pr-10 mt-6 md:mt-0">
-                            <h4 class="text-2xl font-bold text-white mb-2">3. Gemini Context Sync</h4>
-                            <p class="text-textMuted font-body text-sm leading-relaxed">LLM analyzes the scraped data to perfectly define the client's exact niche and offering.</p>
-                        </div>
-                        <div class="z-10 flex items-center justify-center w-14 h-14 bg-darkSurface border border-white/20 rounded-xl shadow-[0_0_30px_rgba(168,85,247,0.2)] order-1 md:order-2 group-hover:border-secondary transition-colors">
-                            <i class="ri-bard-fill text-secondary text-2xl"></i>
-                        </div>
-                        <div class="order-3 md:w-5/12 hidden md:block"></div>
                     </div>
 
                     </div>
@@ -298,49 +284,38 @@
     </section>
 
     <section id="deploy" class="py-32 relative z-10">
-        <div class="max-w-6xl mx-auto px-6 lg:px-8">
-            <div class="glass-card rounded-[2.5rem] p-2 relative overflow-hidden border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.8)] gs-up flex flex-col lg:flex-row bg-[#0a0a0c]">
+        <div class="max-w-6xl mx-auto px-6 lg:px-8 gs-up">
+            <div class="glass-card rounded-[2.5rem] p-2 relative overflow-hidden border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.8)] flex flex-col lg:flex-row bg-[#0a0a0c]">
                 
-                <div class="lg:w-1/3 bg-black/40 rounded-[2rem] p-10 border-r border-white/5 relative overflow-hidden">
-                    <div class="absolute -top-20 -left-20 w-64 h-64 bg-primary/20 blur-[80px] rounded-full pointer-events-none"></div>
-                    
-                    <h3 class="text-2xl font-bold mb-8 text-white flex items-center gap-3">
-                        <i class="ri-terminal-box-line text-primary"></i> App Console
-                    </h3>
-                    
-                    <ul class="space-y-8">
-                        <li class="flex items-start gap-4">
-                            <div class="mt-1 bg-green-500/20 p-1 rounded-full border border-green-500/30"><i class="ri-check-line text-green-400 text-xs"></i></div>
+                <div class="lg:w-1/3 bg-black/40 rounded-[2.2rem] p-10 border-r border-white/5 relative overflow-hidden">
+                    <div class="absolute -top-10 -left-10 w-48 h-48 bg-primary/20 blur-[70px] rounded-full pointer-events-none"></div>
+                    <h3 class="text-2xl font-bold mb-8 text-white flex items-center gap-2"><i class="ri-terminal-box-line text-primary"></i> Secure Console</h3>
+                    <ul class="space-y-6">
+                        <li class="flex items-start gap-3">
+                            <i class="ri-check-circle-fill text-green-500 mt-1"></i>
                             <div>
                                 <h5 class="font-bold text-white text-sm">Server Readiness</h5>
-                                <p class="text-xs text-textMuted font-body mt-1">n8n webhook listening on secure endpoints.</p>
+                                <p class="text-xs text-textMuted font-body mt-1">n8n webhook listening on secure endpoints shown in our workflow logic.</p>
                             </div>
                         </li>
-                        <li class="flex items-start gap-4">
-                            <div class="mt-1 bg-green-500/20 p-1 rounded-full border border-green-500/30"><i class="ri-check-line text-green-400 text-xs"></i></div>
+                        <li class="flex items-start gap-3">
+                            <i class="ri-check-circle-fill text-green-500 mt-1"></i>
                             <div>
                                 <h5 class="font-bold text-white text-sm">API Quota</h5>
                                 <p class="text-xs text-textMuted font-body mt-1">Gemini Pro & Serper keys authenticated.</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start gap-4">
-                            <div class="mt-1 bg-primary/20 p-1 rounded-full border border-primary/30"><i class="ri-lock-fill text-primary text-xs"></i></div>
-                            <div>
-                                <h5 class="font-bold text-white text-sm">Encryption Active</h5>
-                                <p class="text-xs text-textMuted font-body mt-1">Data processed without permanent storage.</p>
                             </div>
                         </li>
                     </ul>
                 </div>
 
                 <div class="lg:w-2/3 p-10 md:p-14">
-                    <div class="mb-10">
-                        <h2 class="text-3xl md:text-4xl font-bold mb-3 text-white">Deploy <span class="text-gradient-primary">Analyzer Agent</span></h2>
-                        <p class="text-textMuted font-body">Enter target parameters to initiate the backend automation.</p>
+                    <div class="mb-10 text-center lg:text-left gs-up">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-3 text-white">Analyze <span class="text-gradient-primary">Agent Agent Deployment</span></h2>
+                        <p class="text-textMuted font-body">Enter target parameters below. This triggers the real background automation logic.</p>
                     </div>
 
                     <form id="seoForm" class="space-y-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 gs-reveal" style="transition-delay: 100ms;">
                             <div class="input-wrapper">
                                 <input type="text" id="name" class="input-field" placeholder=" " required>
                                 <label class="input-label">Executive Name</label>
@@ -351,18 +326,18 @@
                             </div>
                         </div>
 
-                        <div class="input-wrapper">
+                        <div class="input-wrapper gs-reveal" style="transition-delay: 200ms;">
                             <input type="url" id="website" class="input-field" placeholder=" " value="https://" required>
-                            <label class="input-label">Target Domain (e.g., https://yourbusiness.com)</label>
+                            <label class="input-label">Target Domain URL (e.g., https://yourbusiness.com)</label>
                         </div>
 
-                        <div class="input-wrapper">
+                        <div class="input-wrapper gs-reveal" style="transition-delay: 300ms;">
                             <input type="text" id="city" class="input-field" placeholder=" " required>
-                            <label class="input-label">Target City & Region</label>
+                            <label class="input-label">Target City & Region (e.g., Ahmedabad, Gujarat)</label>
                         </div>
 
-                        <button type="submit" id="submitBtn" class="w-full mt-4 bg-white text-black hover:bg-gray-200 font-bold py-4 rounded-xl shadow-lg transition-all duration-300 transform hover:-translate-y-1 flex justify-center items-center gap-2 text-lg">
-                            <span>Execute Masterplan Pipeline</span>
+                        <button type="submit" id="submitBtn" class="gs-reveal w-full mt-4 bg-white text-black hover:bg-gray-200 font-bold py-4 rounded-xl shadow-lg transition-all duration-300 transform hover:-translate-y-1 flex justify-center items-center gap-2 text-lg">
+                            <span>Get My Masterplan Pipeline</span>
                             <i class="ri-arrow-right-circle-fill text-xl"></i>
                         </button>
                     </form>
@@ -376,23 +351,23 @@
             <h2 class="text-center text-3xl md:text-4xl font-bold mb-12 text-white">System <span class="text-gradient-primary">Parameters</span></h2>
             
             <div class="space-y-4">
-                <div class="faq-item glass-card rounded-2xl border border-white/5 cursor-pointer p-6" onclick="toggleFaq(this)">
+                <div class="faq-item glass-card rounded-xl cursor-pointer p-6" onclick="toggleFaq(this)">
                     <div class="flex justify-between items-center">
-                        <h4 class="font-bold text-white text-lg">Are the PDF reports beginner-friendly?</h4>
-                        <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center border border-white/10"><i class="ri-arrow-down-s-line text-xl text-white faq-icon transition-transform duration-300"></i></div>
+                        <h4 class="font-bold text-white text-lg">Are the daily reports easy to follow?</h4>
+                        <i class="ri-arrow-down-s-line text-2xl text-gray-400 faq-icon transition-transform duration-300"></i>
                     </div>
                     <div class="faq-answer">
-                        <p class="text-textMuted font-body leading-relaxed text-sm pt-4 border-t border-white/10">Absolutely. While the backend n8n routing uses advanced logic, the final 30-day output is explicitly formatted in clean, easy-to-read English meant for non-technical executives.</p>
+                        <p class="text-textMuted font-body leading-relaxed text-sm pt-4 border-t border-white/10">Absolutely. While the backend routing in our workflow uses advanced logic, the final 30-day output is explicitly formatted in clean English meant for beginners and seniors.</p>
                     </div>
                 </div>
 
-                <div class="faq-item glass-card rounded-2xl border border-white/5 cursor-pointer p-6" onclick="toggleFaq(this)">
+                <div class="faq-item glass-card rounded-xl cursor-pointer p-6" onclick="toggleFaq(this)">
                     <div class="flex justify-between items-center">
                         <h4 class="font-bold text-white text-lg">How accurate is the competitor tracking?</h4>
-                        <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center border border-white/10"><i class="ri-arrow-down-s-line text-xl text-white faq-icon transition-transform duration-300"></i></div>
+                        <i class="ri-arrow-down-s-line text-2xl text-gray-400 faq-icon transition-transform duration-300"></i>
                     </div>
                     <div class="faq-answer">
-                        <p class="text-textMuted font-body leading-relaxed text-sm pt-4 border-t border-white/10">We bypass standard cached SEO databases and use Serper.dev to perform a live, real-time Google search originating exactly from your specified target city for maximum accuracy.</p>
+                        <p class="text-textMuted font-body leading-relaxed text-sm pt-4 border-t border-white/10">We bypass standard cached SEO databases and use premium APIs to perform real-time, live search engine simulation originating from your exact target city.</p>
                     </div>
                 </div>
             </div>
@@ -404,23 +379,21 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
                 <div>
                     <div class="flex items-center gap-2 mb-6">
-                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
-                            <i class="ri-blaze-fill text-2xl text-white"></i>
-                        </div>
+                        <i class="ri-blaze-fill text-3xl text-primary"></i>
                         <div>
                             <span class="font-bold text-2xl tracking-tighter text-white">RankIQ</span>
                             <span class="block text-[0.6rem] text-primary font-bold uppercase tracking-widest -mt-1">by Pixora Graphics</span>
                         </div>
                     </div>
-                    <p class="text-textMuted font-body text-sm max-w-sm">Building the world's most sophisticated zero-touch SEO automation systems. Driven by logic, executed by AI.</p>
+                    <p class="text-textMuted font-body text-sm max-w-sm mb-6">Building the world's most sophisticated zero-touch SEO automation systems. Driven by logic, executed by AI.</p>
                 </div>
                 
                 <div class="md:pl-10">
                     <h4 class="text-white font-bold mb-6 tracking-wider text-xs uppercase">Architecture</h4>
                     <ul class="space-y-4 text-sm font-body text-textMuted">
-                        <li><a href="#about" class="hover:text-white transition-colors">Enterprise Systems</a></li>
-                        <li><a href="#workflow" class="hover:text-white transition-colors">n8n Routing Logic</a></li>
-                        <li><a href="#deploy" class="hover:text-white transition-colors">Deploy Agent</a></li>
+                        <li><a href="#about" class="hover:text-white transition-colors">Platform Benefits</a></li>
+                        <li><a href="#workflow" class="hover:text-white transition-colors">Our Logic</a></li>
+                        <li><a href="#deploy" class="hover:text-white transition-colors">Get Agent</a></li>
                     </ul>
                 </div>
 
@@ -452,18 +425,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
     <script>
-        // Vanta JS (Hero Background) - Tweaked for dark mode matching
+        // Vanta JS (Hero Background) - Tweaked color to match obsidian black base
         VANTA.NET({
             el: "#hero-bg", mouseControls: true, touchControls: true,
             color: 0x6366f1, backgroundColor: 0x020202,
             points: 15.00, maxDistance: 25.00, spacing: 18.00, showDots: true
-        });
-
-        // Navbar blur on scroll
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 50) { nav.style.background = 'rgba(2, 2, 2, 0.8)'; nav.style.padding = '10px 0'; } 
-            else { nav.style.background = 'rgba(2, 2, 2, 0.4)'; nav.style.padding = '0'; }
         });
 
         // GSAP Animations
@@ -483,7 +449,7 @@
             element.classList.toggle('active');
         }
 
-        // Webhook Submission Logic
+        // PERFECTED: Stateless Fetch Submission to n8n Webhook
         document.getElementById('seoForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const btn = document.getElementById('submitBtn');
@@ -500,6 +466,7 @@
             };
 
             try {
+                // Securely submitting to stateless n8n cloud endpoint
                 const response = await fetch('https://pixoragraphics.app.n8n.cloud/webhook/seo-analyzer', {
                     method: 'POST', headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(formData)
@@ -508,7 +475,7 @@
                 if(response.ok) {
                     Swal.fire({
                         title: 'Agent Deployed!',
-                        text: `The AI is currently analyzing ${formData.city}. The strategy will be sent to ${formData.email}.`,
+                        text: `The AI is currently analyzing ${formData.city}. We will email your plan to ${formData.email}.`,
                         icon: 'success', background: '#09090b', color: '#fff',
                         confirmButtonColor: '#6366f1', customClass: { popup: 'border border-white/10 rounded-2xl' }
                     });
@@ -516,7 +483,7 @@
                 } else throw new Error('Server Error');
             } catch (error) {
                 Swal.fire({
-                    title: 'Connection Fault', text: 'Unable to reach the secure n8n webhook. Please try again.',
+                    title: 'System Fault', text: 'Unable to connect to the secure n8n webhook. Clear data pipeline and retry.',
                     icon: 'error', background: '#09090b', color: '#fff', confirmButtonColor: '#6366f1'
                 });
             } finally {
